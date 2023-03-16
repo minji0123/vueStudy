@@ -33,23 +33,12 @@ Vetur, Vue 3 snippets, HTML CSS Support 세개 설치
 export default {
   name: 'App',
   data(){
-
     return{
       // 데이터 보관함
-      price1: 60,
-      price2: 70,
-      스타일: 'color : #2c3e50',
-      신고수: [0,0,0],
-      메뉴들: ['Home', 'Shop', 'About'],
-      products: ['역삼동원룸', '천호동원룸', '마포동원룸']
     }
-
   },
   methods : {
     // 함수 작성함
-    increase(i){
-      this.신고수[i]++;
-    }
   },
   components: {
   }
@@ -228,6 +217,68 @@ v-else: v-if,v-else-if 에 적은 조건식이 참이 아닐 경우 실행
 </div>
 ```
 
+## [] vue transition
+
+1. 동적 class 넣기
+2. Transition 태그 사용
+
+1. 동적 class 넣기
+
+```html
+<template>
+
+  <div class="start" :class="{ end : true }">
+    <!-- 모달창 -->
+  </div>
+
+</template>
+
+<style>
+.start{
+  opacity: 0;
+  transition: all 1s;
+}
+.end{
+  opacity: 1;
+}
+</style>
+```
+
+2. Transition 태그 사용
+
+```html
+<template>
+
+  <Transition name="fade">
+    <!-- 모달창 -->
+  </Transition>
+
+</template>
+
+<style>
+/* Transition */
+/* 열 때 */
+.fade-enter-from{
+  opacity: 0;
+}
+.fade-enter-active{
+  transition: all 1s;
+}
+.fade-enter-to{
+  opacity: 1;
+}
+/* 닫을 때 */
+.fade-leave-from{
+  opacity: 1;
+}
+.fade-leave-active{
+  transition: all 1s;
+}
+.fade-leave-to{
+  opacity: 0;
+}
+</style>
+```
 
 ---
 
