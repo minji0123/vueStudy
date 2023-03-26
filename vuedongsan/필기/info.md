@@ -14,6 +14,7 @@ yarn global add @vue/cli
 ```bash
 vue create 프로젝트명
 ```
+
 3. VSC 부가기능 설치
 
 Extension 이동 후 
@@ -25,7 +26,7 @@ Vetur, Vue 3 snippets, HTML CSS Support 세개 설치
 
 ```html
 <template>
-    // html 
+    <!-- html  -->
 </template>
 
 <script>
@@ -41,7 +42,17 @@ export default {
     // 함수 작성함
   },
   components: {
-  }
+    // import 된 컴포넌트 적어줌
+  },
+  props:{
+    // 자식컴포넌트에서 사용
+    // 넘겨받은 데이터와 데이터타입 적어줌
+  },
+  watch:{
+    // 사용자가 입력한 데이터 감시
+    // 함수이름 = 감시할 데이터
+  },
+  // 그 외 lifecycle 같은거 넣어줌
 }
 </script>
 
@@ -64,21 +75,21 @@ export default {
     <p>{{ price1 }} 만원</p>
   </div>
   
-    <script>
-        export default {
-        name: 'App',
-        data(){
-            return{
-                price1: 60,
-                products: ['역삼동원룸', '천호동원룸', '마포동원룸']
-            }
-        },
-        methods : {
-        },
-        components: {
+<script>
+  export default {
+    name: 'App',
+    data(){
+        return{
+            price1: 60,
+            products: ['역삼동원룸', '천호동원룸', '마포동원룸']
         }
-        }
-  </script>
+    },
+    methods : {
+    },
+    components: {
+    }
+  }
+</script>
 
 ```
 
@@ -174,15 +185,10 @@ v-if 문법
 
 ```html
 <img src="./assets/room0.jpg" 
-    class="room-img" 
-    @click="모달창열렸니 = true"
+    @click="열렸니 = true"
 >
-  <div class="black-bg" v-if="모달창열렸니 === true">
-    <div class="white-bg" >
-      <h4>상세페이지</h4>
-      <p>상세페이지 내용</p>
-      <button @click="모달창열렸니 = false" > 닫기 </button>
-    </div>  
+  <div v-if="열렸니 === true">
+      <button @click="열렸니 = false" > 닫기 </button>
   </div>
 
 <script>
@@ -190,7 +196,7 @@ v-if 문법
         name: 'App',
         data(){
             return{
-                모달창열렸니: false,
+                열렸니: false,
             }
         },
         methods : {
