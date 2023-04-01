@@ -1,4 +1,5 @@
 <template>
+
 <div class="header">
     <ul class="header-button-left">
       <li>Cancel</li>
@@ -8,8 +9,20 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
+  <!-- <div style="margin-top : 500px"></div> -->
 
-  <ContainerTemp :postData="postData"/>
+    <!-- tab 만들기 -->
+  <div v-if="step === 0">내용0</div>
+  <div v-if="step === 1">내용1</div>
+  <div v-if="step === 2">내용2</div>
+  <button @click="connectStepData(0)">버튼0</button>
+  <button @click="connectStepData(1)">버튼1</button>
+  <button @click="connectStepData(2)">버튼2</button>
+
+  <ContainerTemp :postData="postData"
+                  :step="step"/>
+  <!-- ajax 요청 -->
+  <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -22,18 +35,43 @@
 <script>
 import ContainerTemp from './components/ContainerTemp.vue';
 import postData from './assets/postData.js';
-
+import axios from 'axios';
 
 export default {
   name: 'App',
   data(){
     return{
       postData : postData,
+      클릭데이터: 0,
+      step : 0,
     }
   },
   components: {
     ContainerTemp,
-  }
+  },
+  methods:{
+    more(){
+      if(this.클릭데이터 < 1){
+      axios.get('https://codingapple1.github.io/vue/more0.json')
+        .then((결과)=>{
+          // 요청성공시 실행할 코드
+          console.log(결과.data);
+          this.postData.push(결과.data)
+        });
+      }else{
+      axios.get('https://codingapple1.github.io/vue/more1.json')
+        .then((결과)=>{
+          // 요청성공시 실행할 코드
+          console.log(결과.data);
+          this.postData.push(결과.data)
+        });
+      }
+      this.클릭데이터++;
+    },
+    connectStepData(x){
+      this.step = x;
+    },
+  },
 }
 </script>
 

@@ -31,7 +31,7 @@ export default {
   width: 100%;
 }
 .profile {
-  background-image: url("https://placeimg.com/100/100/arch");
+  /* background-image: url("https://placeimg.com/100/100/arch"); */
   width: 30px;
   height: 30px;
   background-size: 100%;
@@ -50,7 +50,7 @@ export default {
   padding: 10px;
 }
 .post-body {
-  background-image: url("https://placeimg.com/640/480/animals");
+  /* background-image: url("https://placeimg.com/640/480/animals"); */
   height: 450px;
   background-position: center;
   background-size: cover;
