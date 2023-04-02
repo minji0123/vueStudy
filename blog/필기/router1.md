@@ -41,8 +41,7 @@ export default router;
 
 ```html
 <!-- 보여줄 곳을 router-view 로 표시 -->
-<router-view :블로그글="블로그글"></router-view>
-<!-- <DetailList :블로그글="블로그글"/> -->
+<router-view ></router-view>
 
 <!-- 다른 페이지 이동링크 만들 때 사용 -->
 <router-link to="/">홈</router-link>
@@ -50,7 +49,12 @@ export default router;
 <router-link to="/list">리스트페이지</router-link>
 ```
 
+https://router.vuejs.org/guide/
+vue-router 4 참고...
+
+
 ## url parameter
+
 
 1. router.js
 
@@ -60,7 +64,7 @@ const routes = [
 
   // url parameter "/detail/:id/:id2/:id3",
   // 정규식사용도 가능 "/detail/:id(\\d+)", -> 숫자만 입력 가능
-  // vue-router 4 참고...
+
   {
     // path: "/detail/:id(\\d+)",
     path: "/detail/:id",

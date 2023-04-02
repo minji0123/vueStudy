@@ -4,13 +4,13 @@
 
 2. vue 프로젝트 경로에 다음 명령어로 bootstrap 5 설치
 
-```
+```bash
 npm i bootstrap@5.3.0-alpha1
 ```
 
 3. main.js 에 다음 파일 import
 
-```
+```js
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 ```

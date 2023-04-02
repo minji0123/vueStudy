@@ -1,3 +1,6 @@
+https://router.vuejs.org/guide/
+vue-router 4 참고...
+
 ## router 와 route
 
 ### router

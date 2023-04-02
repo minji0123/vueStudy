@@ -2,31 +2,36 @@
 
 <div class="header">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li v-if="step !== 0" @click="connectStepData(0,'back')">Back</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step !== 0 && step !== 2" @click="connectStepData(0,'next')">Next</li>
+      <li v-if="step === 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
   <!-- <div style="margin-top : 500px"></div> -->
 
     <!-- tab 만들기 -->
-  <div v-if="step === 0">내용0</div>
+  <!-- <div v-if="step === 0">내용0</div>
   <div v-if="step === 1">내용1</div>
   <div v-if="step === 2">내용2</div>
   <button @click="connectStepData(0)">버튼0</button>
   <button @click="connectStepData(1)">버튼1</button>
-  <button @click="connectStepData(2)">버튼2</button>
+  <button @click="connectStepData(2)">버튼2</button> -->
 
-  <ContainerTemp :postData="postData"
-                  :step="step"/>
+  <ContainerTemp @write="작성한글 = $event" 
+                  :step="step"
+                  :이미지url="이미지url"
+                  :postData="postData"
+                  />
   <!-- ajax 요청 -->
-  <button @click="more">더보기</button>
+  <!-- <button @click="more">더보기</button> -->
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input type="file" id="file" class="inputfile"
+             @change="uploadImg"/>
       <label for="file" class="input-plus">+</label>
     </ul>
  </div>
@@ -44,6 +49,8 @@ export default {
       postData : postData,
       클릭데이터: 0,
       step : 0,
+      이미지url : '',
+      작성한글:'',
     }
   },
   components: {
@@ -68,8 +75,40 @@ export default {
       }
       this.클릭데이터++;
     },
-    connectStepData(x){
-      this.step = x;
+    connectStepData(x,btn=''){
+      if(btn === 'next'){
+        this.step = 2;
+      }else if(btn === 'back'){
+        this.step = 0;
+      }else {
+        this.step = x;
+      }
+    },
+    uploadImg(e){
+      // 파일 업로드 시 코드 실행
+      let 파일 = e.target.files // 업로드한 파일 담겨있음
+      console.log(파일);
+
+      // 다음 페이지로 보내야됨
+      this.step = 1;
+      // 업로드한 이미지 띄우기
+      let 파일url = URL.createObjectURL(파일[0]);
+      this.이미지url = 파일url;
+
+    },
+    publish(){
+      let 내게시물 = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.이미지url,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.작성한글,
+        filter: "perpetua"
+      };
+      this.postData.unshift(내게시물); // 배열 맨 앞에 넣어줌
+      this.step = 0;
     },
   },
 }
